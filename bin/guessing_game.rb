@@ -1,29 +1,60 @@
 require_relative '../lib/renderer'
 require_relative '../lib/guess'
-class HumanGuess
+class ComputerGuess
   def initialize
     @render = Renderer.new
     @guessed = []
     @game_messages = []
     start_render
+    @num_array = []
+    play
   end
 
   def play
-    select_a_number
+    select_a_range
+    create_array(@low_num,@high_num)
     make_guess
   end
 
   def start_render
     @render.title
     @render.render_guesses(@guessed)
-    @render.render_guess_results(@game_messages)
+    @render.render_guess_result(@game_messages)
   end
 
-  def select_a_number
-    @game_messages.push("Pick a number between 1 and a 100. You have 3 seconds!")
-    sleep 3
-    @game_messages.push("Ready or not here I go!")
-    sleep 1
+  def select_a_range
+    @game_messages.push("Give me a range of numbers. Low end first!")
+    start_render
+    @low_num = get_low_num
+    @game_messages.push("OK. Give me the high end now!")
+    start_render
+    @high_num = get_high_num
+  end
+
+  def get_low_num
+    input = gets.chomp
+    if input.to_i == 0
+      @game_message.push("Give me a real number above 0")
+      start_render
+      get_low_num
+    end
+    return input.to_i
+  end
+
+  def get_high_num
+    input = gets.chomp
+    if input.to_i == 0 || input.to_i < @low_num
+      @game_message.push("Give me a real number higher than the low number")
+      start_render
+      get_low_num
+    end
+    return input.to_i
+  end
+
+  def create_array(low_num,high_num)
+    (low_num..high_num).each do |num|
+      @num_array.push(num)
+    end
   end
 
   def make_guess
@@ -98,3 +129,5 @@ end
 
 
 Game.new
+
+ComputerGuess.new
