@@ -14,7 +14,7 @@ class ComputerGuess
   def play
     select_a_range
     create_array(@low_num,@high_num)
-    @game_messages.push("I will guess your number in #{Math.log(@high_num-@low_num).round} tries.")
+    @game_messages.push("I will guess your number in #{Math.log(@high_num-@low_num).round+1} tries.")
     start_render
     make_guess(@num_array, @low_num, @high_num)
   end
@@ -61,13 +61,13 @@ class ComputerGuess
   end
 
   def get_input(guess)
+    start_render
     @render.print_input("Is your number #{guess} \n1. If your number Higher - 2. If Lower - 3. If I got it")
     input = gets.chomp
     if input.to_i == 1 || input.to_i ==2 || input.to_i ==3
       return input.to_i
     end
     @game_message.push("Enter a valid input")
-    start_render
     get_input
   end
 
