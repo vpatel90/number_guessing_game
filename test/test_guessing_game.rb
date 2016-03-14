@@ -46,8 +46,6 @@ class TestGame < Minitest::Test
     @guess.player_guesses = [25,75]
     assert_equal(@guess_result.push("You are wasting your choice"), @guess.check_too_high(80))
     assert_equal(@guess_result.push("You are guessing lower than your other low!"), @guess.check_too_low(20))
-
-
   end
 
 end
