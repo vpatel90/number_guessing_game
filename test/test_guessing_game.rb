@@ -4,7 +4,6 @@ require 'minitest/pride'
 require_relative '../bin/guessing_game.rb'
 
 class TestGame < Minitest::Test
-  include Renderer
 
   def setup
     @game = Game.new

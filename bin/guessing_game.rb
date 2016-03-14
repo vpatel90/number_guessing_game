@@ -1,12 +1,42 @@
 require_relative '../lib/renderer'
+require_relative '../lib/guess'
+class HumanGuess
+  def initialize
+    @render = Renderer.new
+    @guessed = []
+    @game_messages = []
+    start_render
+  end
 
+  def play
+    select_a_number
+    make_guess
+  end
+
+  def start_render
+    @render.title
+    @render.render_guesses(@guessed)
+    @render.render_guess_results(@game_messages)
+  end
+
+  def select_a_number
+    @game_messages.push("Pick a number between 1 and a 100. You have 3 seconds!")
+    sleep 3
+    @game_messages.push("Ready or not here I go!")
+    sleep 1
+  end
+
+  def make_guess
+
+  end
+end
 
 class Game
   def initialize
     @guess = Guess.new
     @render = Renderer.new
     start_render
-    play
+    #play
   end
 
   def play
@@ -66,61 +96,5 @@ class Game
   end
 end
 
-class Guess
-  attr_accessor :ai_guess, :player_guesses, :guess_result
-  def initialize
-    @ai_guess = rand(1..100)
-    @player_guesses = []
-    @guess_result = []
-  end
-
-  def check_guess(input)
-    if player_guesses.index(input)
-      @guess_result.push("Are you ok...")
-      @player_guesses.push(input)
-    else
-      if input == @ai_guess
-        correct_guess
-        result = "win"
-      elsif input > @ai_guess
-        high_guess
-        check_too_high(input)
-        @player_guesses.push(input)
-        result = @player_guesses.length
-      else
-        low_guess
-        check_too_low(input)
-        @player_guesses.push(input)
-        result = @player_guesses.length
-      end
-    end
-    return result
-  end
-
-  def check_too_high(input)
-    if @player_guesses.length > 0 && @player_guesses.max > @ai_guess && input > @player_guesses.max
-      @guess_result.push("You are wasting your choice")
-    end
-  end
-
-  def check_too_low(input)
-    if @player_guesses.length > 0 && @player_guesses.min < @ai_guess && input < @player_guesses.min
-      @guess_result.push("You are choosing lower than your other low!")
-    end
-  end
-
-  def correct_guess
-    return @guess_result.push("You guessed right!")
-  end
-
-  def high_guess
-    return @guess_result.push("Your guess is too high!")
-  end
-
-  def low_guess
-    return @guess_result.push("Your guess is too low!")
-  end
-
-end
 
 Game.new
