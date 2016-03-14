@@ -43,8 +43,7 @@ class Game
       @guess.guess_result.push("You win! You guessed my Number")
       game_end
     elsif result == 5
-      @guess.guess_result.push("You used up all your guesses! You lose")
-      @guess.guess_result.push("My number was #{@guess.ai_guess}")
+      @guess.guess_result.push("You used up all your guesses! You lose\nMy number was #{@guess.ai_guess}")
       game_end
     end
   end
