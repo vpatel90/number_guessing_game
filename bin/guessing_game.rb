@@ -76,19 +76,24 @@ class Guess
   end
 
   def check_guess(input)
-    if input == @ai_guess
-      correct_guess
-      result = "win"
-    elsif input > @ai_guess
-      high_guess
-      check_too_high(input)
+    if player_guesses.index(input)
+      @guess_result.push("Are you ok...")
       @player_guesses.push(input)
-      result = @player_guesses.length
     else
-      low_guess
-      check_too_low(input)
-      @player_guesses.push(input)
-      result = @player_guesses.length
+      if input == @ai_guess
+        correct_guess
+        result = "win"
+      elsif input > @ai_guess
+        high_guess
+        check_too_high(input)
+        @player_guesses.push(input)
+        result = @player_guesses.length
+      else
+        low_guess
+        check_too_low(input)
+        @player_guesses.push(input)
+        result = @player_guesses.length
+      end
     end
     return result
   end
@@ -116,9 +121,6 @@ class Guess
   def low_guess
     return @guess_result.push("Your guess is too low!")
   end
-
-
-
 
 end
 
