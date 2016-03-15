@@ -13,6 +13,7 @@ class Guess
     else
       if input == @ai_guess
         correct_guess
+        @player_guesses.push(input)
         result = "win"
       elsif input > @ai_guess
         high_guess

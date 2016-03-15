@@ -70,8 +70,14 @@ class ComputerGuess
   def make_guess(range, min, max)
     @max_guess += 1
     guess = (max+min)/2.round
-    @guessed.push(guess)
     input = get_input(guess)
+    @guessed.each do |previous_guess|
+      if guess == previous_guess
+        @game_messages.push("You are lying")
+        game_end
+      end
+    end
+    @guessed.push(guess)
     if input == 3
       @game_messages.push("It took me #{@max_guess} tries")
       game_end
@@ -86,7 +92,7 @@ class ComputerGuess
 
   def game_end
     start_render
-    @render.print_input("Would you like to (P)lay again? or (Q)uit?")
+    @render.print_input("Would you like to (P)lay again? or (M)enu?")
     input = validate_replay(gets.chomp)
   end
 
@@ -99,8 +105,8 @@ class ComputerGuess
       @game_messages = []
       start_render
       play
-    when "Q"
-      exit
+    when "M"
+      return
     end
   end
 end

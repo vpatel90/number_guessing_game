@@ -3,15 +3,14 @@ class Game
     @guess = Guess.new
     @render = Renderer.new
     start_render
-    #play
+    play
   end
 
   def play
     input = get_input
     result = @guess.check_guess(input)
-    check_game_end(result)
     start_render
-    play
+    check_game_end(result)
   end
 
   def start_render
@@ -36,18 +35,21 @@ class Game
   end
 
   def check_game_end(result)
+    start_render
     if result == "win"
       @guess.guess_result.push("You win! You guessed my Number")
       game_end
     elsif result == 5
       @guess.guess_result.push("You used up all your guesses! You lose\nMy number was #{@guess.ai_guess}")
       game_end
+    else
+      play
     end
   end
 
   def game_end
     start_render
-    @render.print_input("Would you like to (P)lay again? or (Q)uit?")
+    @render.print_input("Would you like to (P)lay again? or back to (M)enu?")
     input = validate_replay(gets.chomp)
   end
 
@@ -57,8 +59,9 @@ class Game
       @guess = Guess.new
       start_render
       play
-    when "Q"
-      exit
+    when "M"
+      return
+
     end
   end
 end

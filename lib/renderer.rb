@@ -45,6 +45,20 @@ class Renderer
   end
 
 
+  def render_menu(menu)
+    if @width.to_i > 30
+      menu.each do |line|
+        line = " " * ((@width.to_i-30)/2) + line
+        puts Paint[line,:yellow]
+      end
+    else
+      menu.each do |line|
+        puts Paint[line,:yellow]
+      end
+    end
+
+  end
+
   def print_str(str)
     puts Paint["-",:cyan] * @with.to_i
     puts Paint[str, :yellow]
@@ -71,4 +85,5 @@ class Renderer
     puts Paint[array[-1], :red]
     puts
   end
+
 end
