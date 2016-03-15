@@ -30,7 +30,7 @@ class Renderer
 
 
   def print_str(str)
-    puts str
+    puts str.rjust(20, " ")
   end
 
   def print_input(str)
