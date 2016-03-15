@@ -60,12 +60,11 @@ class Renderer
   end
 
   def print_str(str)
-    puts Paint["-",:cyan] * @with.to_i
     puts Paint[str, :yellow]
   end
 
   def print_input(str)
-    puts Paint["-",:cyan] * @with.to_i
+    puts Paint["-",:cyan] * @width.to_i
     puts Paint[str, :magenta]
     print "> "
   end

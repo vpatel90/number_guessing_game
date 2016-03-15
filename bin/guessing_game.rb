@@ -19,8 +19,10 @@ class GameStateManager
       startGame
     elsif input == 2
       startComputerGUess
-    else
+    elsif input == 3
       exit
+    else
+      menu
     end
   end
 
