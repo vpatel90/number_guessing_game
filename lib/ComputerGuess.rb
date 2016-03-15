@@ -11,9 +11,14 @@ class ComputerGuess
   def play
     select_a_range
     create_array(@low_num,@high_num)
-    @game_messages.push("I will guess your number in #{Math.log(@high_num-@low_num).round+1} tries.")
+    log = get_log(@high_num-@low_num)
+    @game_messages.push("I will guess your number in #{log} tries.")
     start_render
     make_guess(@num_array, @low_num, @high_num)
+  end
+
+  def get_log(num)
+    log = (Math.log(num)/Math.log(2)).round
   end
 
   def start_render
