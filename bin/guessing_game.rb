@@ -49,4 +49,4 @@ class GameStateManager
   end
 end
 
-#GameStateManager.new
+GameStateManager.new

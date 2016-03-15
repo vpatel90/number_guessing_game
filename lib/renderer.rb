@@ -65,6 +65,7 @@ class Renderer
   end
 
   def print_input(str)
+    puts Paint["-",:cyan] * @with.to_i
     puts Paint[str, :magenta]
     print "> "
   end
@@ -81,9 +82,10 @@ class Renderer
   end
 
   def render_guess_result(array)
+    puts Paint[array[-4], :blue]
+    puts Paint[array[-3], :blue]
     puts Paint[array[-2], :blue]
     puts Paint[array[-1], :red]
-    puts
   end
 
 end
