@@ -39,14 +39,14 @@ class GameStateManager
   end
 
   def startGame
-    Game.new
+    Game.new.play
     menu
   end
 
   def startComputerGUess
-    ComputerGuess.new
+    ComputerGuess.new.play
     menu
   end
 end
 
-GameStateManager.new
+#GameStateManager.new

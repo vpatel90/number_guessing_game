@@ -3,7 +3,6 @@ class Game
     @guess = Guess.new
     @render = Renderer.new
     start_render
-    play
   end
 
   def play

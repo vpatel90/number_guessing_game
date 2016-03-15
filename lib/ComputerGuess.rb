@@ -6,7 +6,6 @@ class ComputerGuess
     @max_guess=0
     start_render
     @num_array = []
-    play
   end
 
   def play
