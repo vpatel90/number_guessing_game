@@ -24,11 +24,9 @@ class ComputerGuess
   end
 
   def select_a_range
-    @game_messages.push("Give me a range of numbers. Low end first!")
-    start_render
+    @render.print_input("Give me a range of numbers. Low end first!")
     @low_num = get_low_num
-    @game_messages.push("OK. Give me the high end now!")
-    start_render
+    @render.print_input("OK. Give me the high end now!")
     @high_num = get_high_num
   end
 
@@ -75,21 +73,13 @@ class ComputerGuess
     @guessed.push(guess)
     input = get_input(guess)
     if input == 3
-      @render.print_input("It took me #{@max_guess} tries")
+      @game_messages.push("It took me #{@max_guess} tries")
       game_end
     elsif input == 1
       min = guess + 1
-      if @guessed.last == min
-        @game_messages.push("You are lying")
-        game_end
-      end
       make_guess(range, min, max)
     elsif input == 2
       max = guess - 1
-      if @guessed.last == max
-        @game_messages.push("You are lying")
-        game_end
-      end
       make_guess(range,min,max)
     end
   end
@@ -106,6 +96,7 @@ class ComputerGuess
       @guessed = []
       @max_guess = 0
       @num_array = []
+      @game_messages = []
       start_render
       play
     when "Q"

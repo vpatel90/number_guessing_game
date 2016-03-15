@@ -1,51 +1,74 @@
+
 class Renderer
+
   def title
     system'clear'
-    puts "  /$$$$$$
- /$$__  $$
-| $$  \\__/ /$$   /$$  /$$$$$$   /$$$$$$$ /$$$$$$$
-| $$ /$$$$| $$  | $$ /$$__  $$ /$$_____//$$_____/
-| $$|_  $$| $$  | $$| $$$$$$$$|  $$$$$$|  $$$$$$
-| $$  \\ $$| $$  | $$| $$_____/ \\____  $$\\____  $$
-|  $$$$$$/|  $$$$$$/|  $$$$$$$ /$$$$$$$//$$$$$$$/
- \\______/  \\______/  \\_______/|_______/|_______/
+    title_art= ["  /$$$$$$",
+" /$$__  $$",
+"| $$  \\__/ /$$   /$$  /$$$$$$   /$$$$$$$ /$$$$$$$",
+"| $$ /$$$$| $$  | $$ /$$__  $$ /$$_____//$$_____/",
+"| $$|_  $$| $$  | $$| $$$$$$$$|  $$$$$$|  $$$$$$",
+"| $$  \\ $$| $$  | $$| $$_____/ \\____  $$\\____  $$",
+"|  $$$$$$/|  $$$$$$/|  $$$$$$$ /$$$$$$$//$$$$$$$/",
+" \\______/  \\______/  \\_______/|_______/|_______/",
+"",
+"",
+"",
+" /$$      /$$                   /$$ /$$",
+"| $$$    /$$$                  / $$/ $$",
+"| $$$$  /$$$$ /$$   /$$       /$$$$$$$$$$",
+"| $$ $$/$$ $$| $$  | $$      |   $$  $$_/",
+"| $$  $$$| $$| $$  | $$       /$$$$$$$$$$",
+"| $$\\  $ | $$| $$  | $$      |_  $$  $$_/",
+"| $$ \\/  | $$|  $$$$$$$        | $$| $$",
+"|__/     |__/ \\____  $$        |__/|__/",
+"              /$$  | $$",
+"             |  $$$$$$/",
+"              \\______/",
+"",
+"              "]
 
+    @width = `tput cols`
+    @colors = [:red, :green, :yellow, :blue, :cyan, :magenta]
+    if @width.to_i > 50
+      title_art.each do |line|
+        line = " " * ((@width.to_i-50)/2) + line
+        puts Paint[line,@colors.sample]
+      end
+    else
+      title_art.each do |line|
+        puts Paint[line,@colors.sample]
+      end
+    end
 
-
- /$$      /$$                   /$$ /$$
-| $$$    /$$$                  / $$/ $$
-| $$$$  /$$$$ /$$   /$$       /$$$$$$$$$$
-| $$ $$/$$ $$| $$  | $$      |   $$  $$_/
-| $$  $$$| $$| $$  | $$       /$$$$$$$$$$
-| $$\\  $ | $$| $$  | $$      |_  $$  $$_/
-| $$ \\/  | $$|  $$$$$$$        | $$| $$
-|__/     |__/ \\____  $$        |__/|__/
-              /$$  | $$
-             |  $$$$$$/
-              \\______/
-
-              "
-
+    puts Paint["-",:cyan] * @width.to_i
   end
 
 
   def print_str(str)
-    puts str.rjust(20, " ")
+    puts Paint["-",:cyan] * @with.to_i
+    puts Paint[str, :yellow]
   end
 
   def print_input(str)
-    puts str
+    puts Paint[str, :magenta]
     print "> "
   end
 
   def render_guesses(array)
+    print Paint["          Guesses  ", :yellow]
     array.each do |num|
-      print "  #{num}  "
+      print Paint["|",:cyan]
+      print Paint["  #{num}  ",:yellow]
     end
+    puts Paint["|",:cyan]
+    print Paint["-",:cyan]* @width.to_i
     puts
   end
 
   def render_guess_result(array)
-    puts array.last(2)
+    puts Paint[array[-2], :blue]
+    puts Paint[array[-1], :red]
+    puts
   end
 end
